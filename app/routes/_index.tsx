@@ -1,9 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
-import { H1 } from "summit-kit";
 import { Canvas } from "@react-three/fiber";
 
+import { Layout } from "@/Layout";
 import { Box } from "@/Box";
-import { Navigation } from "@/Navigation";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -17,11 +16,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen">
-			<H1>React and Three JS</H1>
-
-			<Navigation />
-
+		<Layout slideTitle="React and Three" currentSlide={-1}>
 			<Canvas style={{ height: "400px", width: "80vw" }}>
 				<ambientLight intensity={Math.PI / 2} />
 				<spotLight
@@ -32,8 +27,10 @@ export default function Index() {
 					intensity={Math.PI}
 				/>
 				<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-				<Box position={[-1.2, 0, 0]} />
+				<Box position={[0, 0, 0]} />
+				<Box position={[-5, 0, 0]} />
+				<Box position={[5, 0, 0]} />
 			</Canvas>
-		</div>
+		</Layout>
 	);
 }
