@@ -27,9 +27,9 @@ export default function Index() {
 					intensity={Math.PI}
 				/>
 				<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-				<Box position={[0, 0, 0]} />
-				<Box position={[-5, 0, 0]} />
-				<Box position={[5, 0, 0]} />
+				<Box position={[0, 0, 0]} rotate />
+				<Box position={[-5, 0, 0]} rotate />
+				<Box position={[5, 0, 0]} rotate />
 			</Canvas>
 		</Layout>
 	);

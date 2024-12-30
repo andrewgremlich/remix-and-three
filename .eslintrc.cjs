@@ -83,6 +83,19 @@ module.exports = {
   ],
 
   rules: {
-    "react/no-unknown-property": ["error", { ignore: ["args", "intensity", "position", "angle", "penumbra", "decay"] }],
+    "react/no-unknown-property": [
+      "error",
+      {
+        ignore: [
+          "args",
+          "intensity",
+          "position",
+          "angle",
+          "penumbra",
+          "decay",
+          "wireframe",
+        ],
+      },
+    ],
   },
 };

@@ -19,8 +19,8 @@ export const Layout = ({ slideTitle, children, currentSlide }: LayoutProps) => {
 				justify="center"
 				style={{ paddingTop: "30px" }}
 			>
-				<H1>{slideTitle}</H1>
-				{children}
+				<H1 classes={["text-7xl"]}>{slideTitle}</H1>
+				<div className="px-28 w-full h-full flex flex-col">{children}</div>
 			</Flex>
 		</div>
 	);
