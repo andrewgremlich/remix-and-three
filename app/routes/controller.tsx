@@ -1,3 +1,9 @@
+import { Layout } from "@/Layout";
+
 export default function Index() {
-	return <h1>hello world</h1>;
+	return (
+		<Layout slideTitle="Controller">
+      <h2>hello</h2>
+		</Layout>
+	);
 }
