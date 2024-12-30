@@ -5,14 +5,13 @@ import { Navigation } from "./Navigation";
 type LayoutProps = {
 	slideTitle: string;
 	children: React.ReactNode;
-	currentSlide: number;
+	currentSlide?: number;
 };
 
 export const Layout = ({ slideTitle, children, currentSlide }: LayoutProps) => {
 	return (
 		<div className="min-h-screen">
-			<Navigation currentSlide={currentSlide} />
-
+			<Navigation currentSlide={currentSlide ?? -1} />
 			<Flex
 				direction="column"
 				align="center"

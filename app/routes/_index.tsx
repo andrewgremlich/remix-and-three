@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 import { Layout } from "@/Layout";
 import { Box } from "@/Box";
+import { Lighting } from "@/Lighting";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -18,15 +19,7 @@ export default function Index() {
 	return (
 		<Layout slideTitle="React and Three" currentSlide={-1}>
 			<Canvas style={{ height: "400px", width: "80vw" }}>
-				<ambientLight intensity={Math.PI / 2} />
-				<spotLight
-					position={[10, 10, 10]}
-					angle={0.15}
-					penumbra={1}
-					decay={0}
-					intensity={Math.PI}
-				/>
-				<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+				<Lighting />
 				<Box position={[0, 0, 0]} rotate />
 				<Box position={[-5, 0, 0]} rotate />
 				<Box position={[5, 0, 0]} rotate />
