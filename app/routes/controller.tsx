@@ -82,46 +82,42 @@ export default function Index() {
 					size={100}
 				/>
 			)}
-			<div
+			<button
+				type="button"
 				className="col-start-3 row-start-2"
-				onPointerDown={() => {
-					navigator.vibrate(500);
-					console.log("Right");
+				onClick={() => {
 					updateMovement({ x: 1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowRight" size={100} />
-			</div>
-			<div
+			</button>
+			<button
+				type="button"
 				className="col-start-1 row-start-2"
 				onPointerDown={() => {
-					navigator.vibrate(500);
-					console.log("Left");
 					updateMovement({ x: -1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowLeft" size={100} />
-			</div>
-			<div
+			</button>
+			<button
+				type="button"
 				className="col-start-2 row-start-1"
 				onPointerDown={() => {
-					navigator.vibrate(500);
-					console.log("Up");
 					updateMovement({ x: 0, z: -1 });
 				}}
 			>
 				<Icon name="FiArrowUp" size={100} />
-			</div>
-			<div
+			</button>
+			<button
+				type="button"
 				className="col-start-2 row-start-3"
 				onPointerDown={() => {
-					navigator.vibrate(500);
-					console.log("Down");
 					updateMovement({ x: 0, z: 1 });
 				}}
 			>
 				<Icon name="FiArrowDown" size={100} />
-			</div>
+			</button>
 		</div>
 	);
 }

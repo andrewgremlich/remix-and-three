@@ -53,6 +53,8 @@ export default function Index() {
 		}
 	}, [sessionUrl, database, sessionId]);
 
+	console.log(sessionUrl);
+
 	return (
 		<Layout slideTitle="Boxing">
 			<Canvas
