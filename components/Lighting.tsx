@@ -1,7 +1,7 @@
 export const Lighting = () => {
 	return (
 		<>
-			<ambientLight intensity={Math.PI / 2} />
+			<ambientLight intensity={Math.PI} />
 			<spotLight
 				position={[10, 10, 10]}
 				angle={0.15}

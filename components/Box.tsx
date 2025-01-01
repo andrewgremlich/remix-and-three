@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 export type BoxProps = ThreeElements["mesh"] & {
 	wireframe?: boolean;
 	rotate?: boolean;
+	color?: string;
 };
 
 export function Box(props: BoxProps) {
@@ -33,7 +34,7 @@ export function Box(props: BoxProps) {
 		>
 			<boxGeometry args={[2, 2, 2]} />
 			<meshStandardMaterial
-				color={hovered ? "hotpink" : "orange"}
+				color={props.color ? props.color : hovered ? "hotpink" : "orange"}
 				wireframe={props.wireframe ?? false}
 			/>
 		</mesh>

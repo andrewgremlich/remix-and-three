@@ -12,7 +12,11 @@ export default function Index() {
 
 	return (
 		<Layout currentSlide={number}>
-			<Image src="/edison_quote.jpg" alt="Try hard" width="100%" />
+			<Image
+				src="https://fourminutebooks.com/wp-content/uploads/2023/02/marcus-aurelius-quotes-27.jpg"
+				alt="Try hard by Marcus Aurelius"
+				width="100%"
+			/>
 		</Layout>
 	);
 }

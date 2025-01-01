@@ -4,10 +4,10 @@ import { OrbitControls } from "@react-three/drei";
 
 import { Layout } from "@/Layout";
 import { Box } from "@/Box";
-import { slideLoader } from "utils/slideLoader";
-import type { SlideLoaderData } from "utils/types";
 import { Lighting } from "@/Lighting";
 import { TermItem } from "@/Body";
+import { slideLoader } from "utils/slideLoader";
+import type { SlideLoaderData } from "utils/types";
 
 export const loader = slideLoader;
 

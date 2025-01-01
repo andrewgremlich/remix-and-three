@@ -1,5 +1,4 @@
 import { useLoaderData } from "@remix-run/react";
-import { Image } from "summit-kit";
 
 import { Layout } from "@/Layout";
 import { slideLoader } from "utils/slideLoader";
@@ -11,8 +10,8 @@ export default function Index() {
 	const { number } = useLoaderData<SlideLoaderData>();
 
 	return (
-		<Layout currentSlide={number}>
-			<Image src="/edison_quote.jpg" alt="Try hard" width="100%" />
+		<Layout slideTitle="Party Kit" currentSlide={number}>
+			<h2>hello</h2>
 		</Layout>
 	);
 }

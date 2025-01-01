@@ -3,7 +3,7 @@ import { H1, Flex } from "summit-kit";
 import { Navigation } from "./Navigation";
 
 type LayoutProps = {
-	slideTitle: string;
+	slideTitle?: string;
 	children: React.ReactNode;
 	currentSlide?: number;
 };
@@ -18,7 +18,7 @@ export const Layout = ({ slideTitle, children, currentSlide }: LayoutProps) => {
 				justify="center"
 				style={{ paddingTop: "30px" }}
 			>
-				<H1 classes={["text-7xl"]}>{slideTitle}</H1>
+				{slideTitle ? <H1 classes={["text-5xl"]}>{slideTitle}</H1> : null}
 				<div className="px-28 w-full h-full flex flex-col">{children}</div>
 			</Flex>
 		</div>
