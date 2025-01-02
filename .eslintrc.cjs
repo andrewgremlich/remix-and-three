@@ -94,6 +94,7 @@ module.exports = {
           "penumbra",
           "decay",
           "wireframe",
+          "castShadow",
         ],
       },
     ],

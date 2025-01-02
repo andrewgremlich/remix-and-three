@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "summit-kit";
 
 import type { GameLoaderData, Player } from "~/utils/types";
@@ -11,6 +11,7 @@ import {
 	useFirebaseConnection,
 	useReadFirebaseData,
 } from "~/utils/firebase";
+import { randomColor, randomPosition } from "~/utils/random";
 
 export const loader = async (args: LoaderFunctionArgs) => {
 	const url = new URL(args.request.url);
@@ -27,16 +28,20 @@ export default function Index() {
 		database,
 		`sessions/${sessionId}/players/${playerId}`,
 	);
+	const color = useRef(randomColor())
 
 	useEffect(() => {
-		if (loaderData.sessionId) {
+		if (loaderData.sessionId && !playerId) {
 			const data = JSON.parse(
 				base64UrlDecode(loaderData.sessionId),
 			) as unknown as { sessionId: string };
 
 			setSessionId(data.sessionId);
 
-			const initData = { position: [0, 0, 0], color: "darkblue" };
+			const initData = {
+				position: [randomPosition(), 0.5, randomPosition()],
+				color: color.current,
+			};
 
 			const newPlayer = pushData(
 				database,
@@ -48,7 +53,7 @@ export default function Index() {
 
 			setConnected(true);
 		}
-	}, [loaderData.sessionId, database]);
+	}, [database, loaderData.sessionId, playerId]);
 
 	const updateMovement = ({ x, z }: { x: number; z: number }) => {
 		if (player && playerId && sessionId) {
@@ -68,7 +73,7 @@ export default function Index() {
 	};
 
 	return (
-		<div className="bg-sky-800 grid grid-cols-3 grid-rows-3 gap-10 place-items-center place-content-center h-full">
+		<div style={{backgroundColor: color.current}} className="grid grid-cols-3 grid-rows-3 gap-10 place-items-center place-content-center h-full">
 			{connected ? (
 				<Icon
 					classes={["col-start-2", "row-start-2"]}
@@ -86,7 +91,7 @@ export default function Index() {
 				type="button"
 				className="col-start-3 row-start-2"
 				onClick={() => {
-					updateMovement({ x: 1, z: 0 });
+					updateMovement({ x: 0.1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowRight" size={100} />
@@ -95,7 +100,7 @@ export default function Index() {
 				type="button"
 				className="col-start-1 row-start-2"
 				onPointerDown={() => {
-					updateMovement({ x: -1, z: 0 });
+					updateMovement({ x: -0.1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowLeft" size={100} />
@@ -104,7 +109,7 @@ export default function Index() {
 				type="button"
 				className="col-start-2 row-start-1"
 				onPointerDown={() => {
-					updateMovement({ x: 0, z: -1 });
+					updateMovement({ x: 0, z: -0.1 });
 				}}
 			>
 				<Icon name="FiArrowUp" size={100} />
@@ -113,7 +118,7 @@ export default function Index() {
 				type="button"
 				className="col-start-2 row-start-3"
 				onPointerDown={() => {
-					updateMovement({ x: 0, z: 1 });
+					updateMovement({ x: 0, z: 0.1 });
 				}}
 			>
 				<Icon name="FiArrowDown" size={100} />

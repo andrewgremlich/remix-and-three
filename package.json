@@ -12,18 +12,20 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.120.5",
     "@react-three/fiber": "^8.17.10",
     "@remix-run/node": "^2.15.2",
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",
     "@types/three": "^0.171.0",
+    "cannon-es": "^0.20.0",
     "firebase": "^11.1.0",
     "isbot": "^4.1.0",
     "qrcode.react": "^4.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "summit-kit": "^0.5.4",
+    "summit-kit": "^0.6.0",
     "three": "^0.172.0",
     "uuid": "^11.0.3"
   },

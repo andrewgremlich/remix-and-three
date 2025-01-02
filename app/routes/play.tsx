@@ -1,13 +1,14 @@
-import { Canvas } from "@react-three/fiber";
 import { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Physics } from "@react-three/cannon";
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { OrbitControls } from "@react-three/drei";
-import { v4 } from "uuid";
 import { QRCodeSVG } from "qrcode.react";
+import { v4 } from "uuid";
 
-import { Box } from "@/Box";
 import { Layout } from "@/Layout";
 import { Lighting } from "@/Lighting";
+import { PlayerBox } from "@/PlayerBox";
+import { Ground } from "@/Ground";
 import type { Player } from "~/utils/types";
 import {
 	pushData,
@@ -15,6 +16,7 @@ import {
 	useReadFirebaseData,
 } from "~/utils/firebase";
 import { base64UrlEncode } from "~/utils/base64";
+import { OrbitControls } from "@react-three/drei";
 
 export const loader = async (args: LoaderFunctionArgs) => {
 	const url = new URL(args.request.url);
@@ -41,15 +43,9 @@ export default function Index() {
 
 	useEffect(() => {
 		if (!sessionUrl && database && sessionId) {
-			const data = pushData(database, `sessions/${sessionId}/players`, {
-				position: [0, 0, 0],
-				color: "darkred",
-			});
-
-			if (data?.key)
-				setSessionUrl(
-					`${window.location.origin}/controller?sessionId=${base64UrlEncode(JSON.stringify({ sessionId }))}`,
-				);
+			setSessionUrl(
+				`${window.location.origin}/controller?sessionId=${base64UrlEncode(JSON.stringify({ sessionId }))}`,
+			);
 		}
 	}, [sessionUrl, database, sessionId]);
 
@@ -58,17 +54,26 @@ export default function Index() {
 	return (
 		<Layout slideTitle="Boxing">
 			<Canvas
-				style={{ height: "400px", width: "80vw" }}
-				camera={{ position: [5, 5, 5], fov: 50 }}
+				style={{ height: "600px", width: "100%" }}
+				camera={{ position: [0, 30, 30], fov: 50 }}
 			>
 				<OrbitControls />
-				<Lighting />
-				{players &&
-					Object.values(players)?.map((player) => (
-						<Box key={v4()} position={player.position} color={player.color} />
-					))}
+				<Physics>
+					<Lighting />
+					<Ground />
+					{players &&
+						Object.values(players)?.map((player) => (
+							<PlayerBox
+								key={v4()}
+								position={player.position}
+								color={player.color}
+							/>
+						))}
+				</Physics>
 			</Canvas>
-			{sessionUrl && <QRCodeSVG value={sessionUrl} size={200} />}
+			<div className="fixed bottom-5 left-5">
+				{sessionUrl && <QRCodeSVG value={sessionUrl} size={200} />}
+			</div>
 		</Layout>
 	);
 }

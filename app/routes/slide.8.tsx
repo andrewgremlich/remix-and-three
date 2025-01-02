@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { Li, Link } from "summit-kit";
+import { Link, Ul } from "summit-kit";
 
 import { Layout } from "@/Layout";
 import { slideLoader } from "utils/slideLoader";
@@ -16,27 +16,30 @@ export default function Index() {
 			slideTitle="Lessons Learned from Freelance project"
 			currentSlide={number}
 		>
-			<ul>
+			<Ul>
 				<Item>
 					Three.JS doesn&apos;t save the shape
-					<ul>
-						<Li>You would have to save the matric to save the shape.</Li>
-					</ul>
+					<Ul>
+						<Item>You would have to save the matrix to save the shape.</Item>
+					</Ul>
 				</Item>
 				<Item>
-					I shouldn&apos;t have kept up with math.
-					<ul>
-						<Li>
-							<Link href="https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/moller-trumbore-ray-triangle-intersection.html">
+					I should have kept up with math.
+					<Ul>
+						<Item>
+							Raytracing is very computationally heavy!{" "}
+							<Link
+								href="https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/moller-trumbore-ray-triangle-intersection.html"
+								target="_blank"
+							>
 								Raytracing example
 							</Link>
-						</Li>
-					</ul>
+						</Item>
+					</Ul>
 				</Item>
-        <Item>
-          OffscreenCanvas is dope!
-        </Item>
-			</ul>
+				<Item>OffscreenCanvas is dope!</Item>
+				<Item>Different labels for the vertical axis.</Item>
+			</Ul>
 		</Layout>
 	);
 }
