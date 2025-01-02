@@ -4,7 +4,6 @@ import { Physics } from "@react-three/cannon";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { QRCodeSVG } from "qrcode.react";
 import { v4 } from "uuid";
-import { ClientOnly } from "remix-utils/client-only";
 
 import { Layout } from "@/Layout";
 import { Lighting } from "@/Lighting";
@@ -53,32 +52,28 @@ export default function Index() {
 	console.log(sessionUrl);
 
 	return (
-		<ClientOnly>
-			{() => (
-				<Layout slideTitle="Boxing">
-					<Canvas
-						style={{ height: "600px", width: "100%" }}
-						camera={{ position: [0, 30, 30], fov: 50 }}
-					>
-						<OrbitControls />
-						<Physics>
-							<Lighting />
-							<Ground />
-							{players &&
-								Object.values(players)?.map((player) => (
-									<PlayerBox
-										key={v4()}
-										position={player.position}
-										color={player.color}
-									/>
-								))}
-						</Physics>
-					</Canvas>
-					<div className="fixed bottom-5 left-5">
-						{sessionUrl && <QRCodeSVG value={sessionUrl} size={200} />}
-					</div>
-				</Layout>
-			)}
-		</ClientOnly>
+		<Layout slideTitle="Boxing">
+			<Canvas
+				style={{ height: "600px", width: "100%" }}
+				camera={{ position: [0, 30, 30], fov: 50 }}
+			>
+				<OrbitControls />
+				<Physics>
+					<Lighting />
+					<Ground />
+					{players &&
+						Object.values(players)?.map((player) => (
+							<PlayerBox
+								key={v4()}
+								position={player.position}
+								color={player.color}
+							/>
+						))}
+				</Physics>
+			</Canvas>
+			<div className="fixed bottom-5 left-5">
+				{sessionUrl && <QRCodeSVG value={sessionUrl} size={200} />}
+			</div>
+		</Layout>
 	);
 }
