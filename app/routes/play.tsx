@@ -60,7 +60,7 @@ export default function Index() {
 				<OrbitControls />
 				{/* <Physics> */}
 				<Lighting />
-				<Ground />
+				{/* <Ground />
 				{players &&
 					Object.values(players)?.map((player) => (
 						<PlayerBox
@@ -68,7 +68,7 @@ export default function Index() {
 							position={player.position}
 							color={player.color}
 						/>
-					))}
+					))} */}
 				{/* </Physics> */}
 			</Canvas>
 			<div className="fixed bottom-5 left-5">
