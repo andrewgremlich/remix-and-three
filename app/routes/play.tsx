@@ -3,12 +3,12 @@ import { Canvas } from "@react-three/fiber";
 // import { Physics } from "@react-three/cannon";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { QRCodeSVG } from "qrcode.react";
-// import { v4 } from "uuid";
+import { v4 } from "uuid";
 
 import { Layout } from "@/Layout";
-// import { Lighting } from "@/Lighting";
-// import { PlayerBox } from "@/PlayerBox";
-// import { Ground } from "@/Ground";
+import { Lighting } from "@/Lighting";
+import { PlayerBox } from "@/PlayerBox";
+import { Ground } from "@/Ground";
 import type { Player } from "~/utils/types";
 import {
 	pushData,
@@ -58,18 +58,18 @@ export default function Index() {
 				camera={{ position: [0, 30, 30], fov: 50 }}
 			>
 				<OrbitControls />
-				{/* <Physics>
-					<Lighting />
-					<Ground />
-					{players &&
-						Object.values(players)?.map((player) => (
-							<PlayerBox
-								key={v4()}
-								position={player.position}
-								color={player.color}
-							/>
-						))}
-				</Physics> */}
+				{/* <Physics> */}
+				<Lighting />
+				<Ground />
+				{players &&
+					Object.values(players)?.map((player) => (
+						<PlayerBox
+							key={v4()}
+							position={player.position}
+							color={player.color}
+						/>
+					))}
+				{/* </Physics> */}
 			</Canvas>
 			<div className="fixed bottom-5 left-5">
 				{sessionUrl && <QRCodeSVG value={sessionUrl} size={200} />}
