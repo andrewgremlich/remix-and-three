@@ -36,7 +36,7 @@ export default function Index() {
 			{location ? (
 				<div className="fixed bottom-0 left-0 p-4">
 					<figure>
-						<QRCodeSVG value="https://remix.run" />
+						<QRCodeSVG value="https://remix-and-three.gremlich.dev" />
 						<figcaption>To the website!</figcaption>
 					</figure>
 				</div>
