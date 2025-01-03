@@ -3,13 +3,13 @@ import { Canvas } from "@react-three/fiber";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { QRCodeSVG } from "qrcode.react";
 // import { v4 } from "uuid";
-import { OrbitControls, Torus } from "@react-three/drei";
-import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
+import { OrbitControls } from "@react-three/drei";
+import { Physics, RigidBody } from "@react-three/rapier";
 
 import { Layout } from "@/Layout";
 import { Lighting } from "@/Lighting";
 // import { PlayerBox } from "@/PlayerBox";
-// import { Ground } from "@/Ground";
+import { Ground } from "@/Ground";
 import type { Player } from "~/utils/types";
 import {
 	pushData,
@@ -17,6 +17,7 @@ import {
 	useReadFirebaseData,
 } from "~/utils/firebase";
 import { base64UrlEncode } from "~/utils/base64";
+import { Game } from "@/Game";
 
 export const loader = async (args: LoaderFunctionArgs) => {
 	const url = new URL(args.request.url);
@@ -60,14 +61,15 @@ export default function Index() {
 				<OrbitControls />
 				<Physics>
 					<Lighting />
-					<RigidBody colliders={"hull"} restitution={2}>
-						<Torus />
+					<Game />
+					<RigidBody type="fixed">
+						<mesh position={[0, -1, 0]}>
+							<boxGeometry args={[50, 1, 50]} />
+							<meshStandardMaterial color="darkgreen" />
+						</mesh>
 					</RigidBody>
 
-					<CuboidCollider position={[0, -2, 0]} args={[20, 0.5, 20]} />
-
-					{/* <Ground />
-					{players &&
+					{/* {players &&
 						Object.values(players)?.map((player) => (
 							<PlayerBox
 								key={v4()}

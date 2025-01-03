@@ -1,6 +1,6 @@
+import { RigidBody } from "@react-three/rapier";
+import { useRef } from "react";
 import type { Mesh } from "three";
-import { useEffect } from "react";
-import { useBox } from "@react-three/cannon";
 
 type PlayerBoxProps = {
 	position: [number, number, number];
@@ -8,22 +8,14 @@ type PlayerBoxProps = {
 };
 
 export const PlayerBox = (props: PlayerBoxProps) => {
-	const [ref] = useBox<Mesh>(() => ({
-		mass: 1,
-		position: props.position,
-	}));
-
-	useEffect(() => {
-		if (ref.current) {
-			const [x, y, z] = props.position;
-			ref.current.position.set(x, y, z); // Pass all three dimensions
-		}
-	}, [props.position, ref]);
+	const ref = useRef<Mesh>(null);
 
 	return (
-		<mesh ref={ref} castShadow>
-			<boxGeometry args={[1, 1, 1]} />
-			<meshStandardMaterial color={props.color} />
-		</mesh>
+		<RigidBody colliders="cuboid">
+			<mesh ref={ref} position={props.position}>
+				<boxGeometry args={[1, 1, 1]} />
+				<meshStandardMaterial color={props.color} />
+			</mesh>
+		</RigidBody>
 	);
 };

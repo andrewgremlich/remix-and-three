@@ -95,6 +95,7 @@ module.exports = {
           "decay",
           "wireframe",
           "castShadow",
+          "rotation"
         ],
       },
     ],
