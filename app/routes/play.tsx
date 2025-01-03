@@ -48,7 +48,7 @@ export default function Index() {
 					camera={{ position: [0, 30, 30], fov: 50 }}
 				>
 					<OrbitControls />
-					<Physics>
+					<Physics colliders="hull">
 						<Lighting />
 						<Game sessionId={sessionId} />
 						<RigidBody type="fixed">

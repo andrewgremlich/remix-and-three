@@ -1,59 +1,72 @@
-import { useEffect } from "react";
 import { useLoaderData } from "@remix-run/react";
-import fs from "node:fs/promises";
-import path from "node:path";
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { STLLoader } from "three/examples/jsm/Addons.js";
+import { Link, Ul } from "summit-kit";
 
 import { Layout } from "@/Layout";
-import { Box } from "@/Box";
-import { Lighting } from "@/Lighting";
 import { slideLoader } from "utils/slideLoader";
 import type { SlideLoaderData } from "utils/types";
+import { Item } from "@/Body";
 
-export const loader = async (args: LoaderFunctionArgs) => {
-	// try {
-	const pathToSTL = path.resolve(process.cwd(), "public/3d-data.json");
-	// const exists = await fs.stat(pathToSTL);
-
-	return { ...slideLoader(args) };
-	// } catch (error) {
-	// 	console.error(error);
-	// 	return { ...slideLoader(args) };
-	// }
-};
+export const loader = slideLoader;
 
 export default function Index() {
 	const { number } = useLoaderData<SlideLoaderData>();
 
-	useEffect(() => {
-		const fetchSTL = async () => {
-			const pathToSTL = await fetch("/Master_Chief.stl");
-			const buffer = await pathToSTL.arrayBuffer();
-			const loader = new STLLoader();
-			const geometry = loader.parse(buffer);
-
-			console.log(geometry);
-		};
-
-		fetchSTL();
-	}, []);
-
 	return (
-		<Layout slideTitle="Loading Data" currentSlide={number}>
-			<Canvas
-				className="mb-20"
-				style={{ height: "400px", width: "80vw" }}
-				camera={{ position: [5, 5, 5], fov: 50 }}
-			>
-				<OrbitControls />
-				<gridHelper args={[10, 10, "white", "gray"]} />
-				<Lighting />
-				<Box position={[2.5, 0, 0]} wireframe />
-				<Box position={[-2.5, 0, 0]} />
-			</Canvas>
+		<Layout
+			slideTitle="Lessons Learned from Freelance project"
+			currentSlide={number}
+		>
+			<Ul>
+				<Item>
+					Three.JS doesn&apos;t save the shape
+					<Ul>
+						<Item>You would have to save the matrix to save the shape.</Item>
+					</Ul>
+				</Item>
+				<Item>
+					I should have kept up with math.
+					<Ul>
+						<Item>
+							Raytracing is very computationally heavy!{" "}
+							<Link
+								href="https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/moller-trumbore-ray-triangle-intersection.html"
+								target="_blank"
+							>
+								Raytracing example
+							</Link>
+						</Item>
+					</Ul>
+				</Item>
+				<Item>
+					OffscreenCanvas is dope!
+					<Ul>
+						<Item>
+							Here is an{" "}
+							<Link
+								href="https://github.com/andrewgremlich/socket-print/blob/main/src/utils/sliceWorker.ts"
+								target="_blank"
+							>
+								example
+							</Link>
+						</Item>
+					</Ul>
+				</Item>
+				<Item>
+					Different labels for the vertical axis.
+					<Ul>
+						<Item>
+							For 3D animation, the vertical axis is typically labeled Y
+						</Item>
+						<Item>
+							For 3D printing, the vertical axis is typically labelled Z
+						</Item>
+					</Ul>
+				</Item>
+				<Item>
+					If doing freelancing, stick with something that you&apos;ll be
+					efficient in.
+				</Item>
+			</Ul>
 		</Layout>
 	);
 }

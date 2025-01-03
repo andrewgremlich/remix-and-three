@@ -14,5 +14,5 @@ export const TermItem = ({
 };
 
 export const Item = ({ children }: { children: ReactNode }) => {
-	return <Li classes={["text-3xl", "mb-10"]}>{children}</Li>;
+	return <Li classes={["text-3xl", "mb-8"]}>{children}</Li>;
 };
