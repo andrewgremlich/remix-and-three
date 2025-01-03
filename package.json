@@ -8,13 +8,14 @@
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "format": "npx @biomejs/biome format --write app/ components/",
-    "start": "node_modules/@remix-run/serve/dist/cli.js ./build/server/index.js",
+    "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.120.5",
     "@react-three/fiber": "^8.17.10",
+    "@react-three/rapier": "^1.5.0",
     "@remix-run/node": "^2.15.2",
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",

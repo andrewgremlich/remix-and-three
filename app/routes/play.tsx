@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Physics } from "@react-three/cannon";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { QRCodeSVG } from "qrcode.react";
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
+import { OrbitControls, Torus } from "@react-three/drei";
+import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
 
 import { Layout } from "@/Layout";
 import { Lighting } from "@/Lighting";
-import { PlayerBox } from "@/PlayerBox";
-import { Ground } from "@/Ground";
+// import { PlayerBox } from "@/PlayerBox";
+// import { Ground } from "@/Ground";
 import type { Player } from "~/utils/types";
 import {
 	pushData,
@@ -16,7 +17,6 @@ import {
 	useReadFirebaseData,
 } from "~/utils/firebase";
 import { base64UrlEncode } from "~/utils/base64";
-import { OrbitControls } from "@react-three/drei";
 
 export const loader = async (args: LoaderFunctionArgs) => {
 	const url = new URL(args.request.url);
@@ -60,7 +60,13 @@ export default function Index() {
 				<OrbitControls />
 				<Physics>
 					<Lighting />
-					<Ground />
+					<RigidBody colliders={"hull"} restitution={2}>
+						<Torus />
+					</RigidBody>
+
+					<CuboidCollider position={[0, -2, 0]} args={[20, 0.5, 20]} />
+
+					{/* <Ground />
 					{players &&
 						Object.values(players)?.map((player) => (
 							<PlayerBox
@@ -68,7 +74,7 @@ export default function Index() {
 								position={player.position}
 								color={player.color}
 							/>
-						))}
+						))} */}
 				</Physics>
 			</Canvas>
 			<div className="fixed bottom-5 left-5">
