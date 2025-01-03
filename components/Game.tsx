@@ -1,32 +1,34 @@
-import { useRapier } from "@react-three/rapier";
+import { v4 } from "uuid";
 import { useFrame } from "@react-three/fiber";
 
 import { PlayerBox } from "./PlayerBox";
+import { useFirebaseConnection, useReadFirebaseData } from "~/utils/firebase";
+import type { Player } from "~/utils/types";
 
-export const Game = () => {
-	const { world } = useRapier();
+export type GameProps = {
+	sessionId: string;
+};
+
+export const Game = ({ sessionId }: GameProps) => {
+	const { database } = useFirebaseConnection();
+	const players = useReadFirebaseData<Player[]>(
+		database,
+		`sessions/${sessionId}/players`,
+	);
 
 	// Use the physics loop to check for collisions or apply forces
-	useFrame(() => {
-		world.forEachActiveRigidBody((body) => {
-			const velocity = body.linvel(); // Get linear velocity
-			if (velocity.length() > 5) {
-				body.setLinvel(velocity.scale(0.9)); // Apply friction
-			}
-		});
-	});
+	useFrame(() => {});
 
-	// Spawn multiple boxes in a stack
-	const boxes = [];
-	for (let i = 0; i < 10; i++) {
-		boxes.push(
-			<PlayerBox
-				key={i}
-				position={[Math.random() * 5, i * 2, Math.random() * 5]}
-				color="red"
-			/>,
-		);
-	}
-
-	return <>{boxes}</>;
+	return (
+		<>
+			{players &&
+				Object.values(players)?.map((player) => (
+					<PlayerBox
+						key={v4()}
+						position={player.position}
+						color={player.color}
+					/>
+				))}
+		</>
+	);
 };

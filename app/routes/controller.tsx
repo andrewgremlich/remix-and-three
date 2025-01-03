@@ -91,7 +91,7 @@ export default function Index() {
 				type="button"
 				className="col-start-3 row-start-2"
 				onClick={() => {
-					updateMovement({ x: 0.1, z: 0 });
+					updateMovement({ x: 1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowRight" size={100} />
@@ -100,7 +100,7 @@ export default function Index() {
 				type="button"
 				className="col-start-1 row-start-2"
 				onPointerDown={() => {
-					updateMovement({ x: -0.1, z: 0 });
+					updateMovement({ x: -1, z: 0 });
 				}}
 			>
 				<Icon name="FiArrowLeft" size={100} />
@@ -109,7 +109,7 @@ export default function Index() {
 				type="button"
 				className="col-start-2 row-start-1"
 				onPointerDown={() => {
-					updateMovement({ x: 0, z: -0.1 });
+					updateMovement({ x: 0, z: -1 });
 				}}
 			>
 				<Icon name="FiArrowUp" size={100} />
@@ -118,7 +118,7 @@ export default function Index() {
 				type="button"
 				className="col-start-2 row-start-3"
 				onPointerDown={() => {
-					updateMovement({ x: 0, z: 0.1 });
+					updateMovement({ x: 0, z: 1 });
 				}}
 			>
 				<Icon name="FiArrowDown" size={100} />
